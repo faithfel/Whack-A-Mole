@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Whack-A-Mole</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="score">Score: <span>0</span></div>
+            <div class="timer">Time Left: 00:<span>00</span>s</div>
+        </div>
+        <div class="gameWrapper">
+            <div class="boxCon">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+        </div>
+        <div class="footer">
+            <div class="coolDown "> The game will start in <span>3</span>...</div>
+            <div class="startNow hide">You can start whacking now!! </div>
+            <div class="gameOver hide">
+                Time's up! You've whacked <span id="totalScore"></span> point/s.
+                <br><u class="restart">Click here to restart</u>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

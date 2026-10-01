@@ -1,0 +1,96 @@
+const scoreEl = document.querySelector(".score span");
+const timerEl = document.querySelector(".timer span");
+const boxEl = document.querySelectorAll(".box");
+const coolDownEl = document.querySelector(".coolDown span");
+const coolDownDiv = document.querySelector(".coolDown");
+const startNowEl = document.querySelector(".startNow");
+const gameOverEl = document.querySelector(".gameOver");
+const totalScoreEl = document.querySelector(".gameOver span");
+const restartEl = document.querySelector(".restart")
+
+startGame()
+
+let score = 0;
+
+function startGame(){
+    
+    coolDownEl.textContent = "";
+    scoreEl.textContent = "0";
+
+    let coolDown = 3;
+
+    const timer = setInterval(() => {
+    coolDownEl.textContent = coolDown;
+    coolDown--;
+    
+    if (coolDown < -1) {
+        clearInterval(timer);
+        coolDownDiv.classList.add("hide");
+        startNowEl.classList.remove("hide")
+        timerLeft()
+    }
+    }, 1000);
+
+    
+    function timerLeft(){
+        let timeLeft = 20;
+
+        const timer = setInterval(() => {
+        timerEl.textContent = timeLeft;
+        randomShuffle()
+        timeLeft--;
+
+        if (timeLeft < 0) {
+            clearInterval(timer);
+            console.log("Time's up!");
+            endGame();
+            }
+        }, 1000);
+    }
+
+    function randomShuffle(){
+        const random = Math.floor((Math.random() * boxEl.length))
+        boxEl[random].classList.add("active")
+
+        console.log('boxEl[random]: ', boxEl[random]);
+
+        setTimeout(resetActive, 800)
+        function resetActive(){
+           boxEl[random].classList.remove("active") 
+           
+        }
+    }
+
+    for( i = 0; i < boxEl.length; i++){
+        boxEl[i].addEventListener("click", boxClick);
+    }
+
+    function boxClick(e){
+        const userClicked = e.currentTarget;
+        console.log(userClicked.className);
+        
+        if (userClicked.classList.contains("active")){
+            scoreEl.textContent = score;
+            totalScoreEl.textContent = score;
+            console.log("added score");
+            score++;
+        } else {
+            console.log("wrong box");
+
+        }
+    }
+}
+
+
+function endGame(){
+    startNowEl.classList.add("hide")
+    gameOverEl.classList.remove("hide")
+}
+
+restartEl.addEventListener("click", function() {
+    timerEl.textContent = "00";
+    score = 0;
+    gameOverEl.classList.add("hide")
+    coolDownDiv.classList.remove("hide")
+    startGame()
+});
